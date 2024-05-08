@@ -5,16 +5,15 @@ services:
     build: 
       context: ./services/web
       dockerfile: Dockerfile.prod
-    command: gunicorn --bind 0.0.0.0:1121 manage:app
+    command: gunicorn --bind 0.0.0.0:3515 manage:app
     volumes:
       - static_volume:/home/app/web/project/static
       - media_volume:/home/app/web/project/media
     expose:
-        - 8867
+        - 55553
     env_file:
       - ./.env.prod
     depends_on:
-      - db
       - postgres
   postgres:
     build: services/postgres
@@ -26,20 +25,14 @@ services:
       - POSTGRES_PASSWORD=pass
       - PGUSER=postgres
     ports:
-      - 8868:5432
-  db:
-    image: postgres:13
-    volumes:
-      - postgres_data_prod:/var/lib/postgresql/data/
-    env_file:
-      - ./.env.prod.db
+      - 55554:5432
   nginx:
     build: ./services/nginx
     volumes:
       - static_volume:/home/app/web/project/static
       - media_volume:/home/app/web/project/media
     ports:
-      - 8868:80
+      - 55553:80
     depends_on:
       - web
 

@@ -9,9 +9,8 @@ CREATE TABLE users (
 );
 
 CREATE TABLE tweet_urls (
-    id_tweets BIGINT,
-    id_urls BIGINT,
-    PRIMARY KEY (id_tweets, id_urls),
+    id_tweets BIGINT PRIMARY KEY,
+    id_urls BIGINT
 );
 
 CREATE TABLE messages (

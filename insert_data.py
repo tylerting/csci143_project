@@ -16,8 +16,8 @@ from sqlalchemy.exc import IntegrityError
 # Create database connection
 #engine = create_engine(args.db, connect_args={'application_name': 'insert_data.py'})
 # Define the database URI
-#db_uri = "postgresql://postgres:pass@localhost:9373"
-db_uri = "postgresql://postgres:pass@localhost:9373"
+#db_uri = "postgresql://postgres:pass@localhost:8868"
+db_uri = "postgresql://postgres:pass@localhost:55554"
 engine = create_engine(db_uri, connect_args={'application_name': 'insert_data.py'})
 connection = engine.connect()
 
@@ -54,8 +54,8 @@ def generate_tweet_urls(num_tweet_urls, max_tweet_id, max_url_id):
 
 messages_list = [
     "hello world", "hola mundo", "salve munde",
-    "Big Data is hard", "The final is hard", "Mike, please be merciful",
-    "I love my dog", "Henry is smort", "I am excited for summer"
+    "Peyton Manning", "Tom Brady", "Patrick Mahomes",
+    "Tortillas", "Quesadillas", "Tacos"
 ]
 # Function to generate random messages
 def generate_messages(num_messages):
