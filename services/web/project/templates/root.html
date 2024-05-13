@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>Recent Tweets</h2>
+<p>We will be generating random users, tweets, and time. </p>
+
+
+<div class="tweet-list">
+    {% for tweet in tweet_list %}
+    <div class="tweet">
+        <div class="user-info">
+            <span class="user-name">{{ tweet.username }}</span>
+            <span class="url">{{ tweet.url }}</span>
+        </div>
+        <div class="tweet-content">
+            <p class="tweet-text">{{ tweet.text }}</p>
+            <p class="created-at">Created at: {{ tweet.date }}</p>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<div>
+    {% if page_number > 1 %}
+        <a href="?page={{ page_number - 1 }}" class="submit">Previous</a>
+    {% endif %}
+
+    Page {{ page_number }} 
+
+    {% if tweet_list|length == 20 %}
+        <a href="?page={{ page_number + 1 }}" class="submit">Next</a>
+    {% endif %}
+</div>
+
+
+{% endblock %}

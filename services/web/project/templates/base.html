@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title> Twitter Website by Tyler</title>
+    <!-- Add any additional CSS or meta tags here -->
+</head>
+<body>
+    <h1>Twitter Website by Tyler</h1>
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href='/search'>Search</a></li>
+            {% if logged_in %}
+                <li><a href="/logout">Logout</a></li>
+                <li><a href="/create_message">Create Message</a></li>
+            {% else %}
+                <li><a href="/login">Login</a></li>
+                <li><a href="/create_user">Create User</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+
+    {% block content %}
+    {% endblock %}
+</body>
+</html>
+

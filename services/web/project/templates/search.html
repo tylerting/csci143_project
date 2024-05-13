@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Search</h2>
+
+<form action="/search" method="POST">
+    <input type="text" name="query" value={{query}}>
+    <input type="submit" value="search" class="submit">
+</form>
+
+{% if suggestion and suggestion != query %}
+<p class="suggestion">Did you mean <a href="{{ url_for('search_message', query=suggestion) }}">{{suggestion}}</a>?</p>
+{% endif %}
+
+{% for message in messages %}
+<div class="container">
+    <h4><img src="{{message['image_url']}}">{{message['username']}} (age {{message['age']}})</h4>
+    {{message['message']|safe}}
+    <p><span class="time-right">{{message['created_at']}}</span></p>
+    {% if message['username']==username %}
+    <form action="/delete_message" method="post" style="display: inline-block;">
+        <input type="hidden" value="{{message['id']}}" name="message_id">
+        <input type="submit" value="delete" class="submit">
+    </form>
+    <form action="/edit_message" method="post" style="display: inline-block;">
+        <input type="hidden" value="{{message['id']}}" name="message_id">
+        <input type="hidden" value="{{message['message']}}" name="original_message">
+        <input type="submit" value="edit" class="submit">
+    </form>
+    {% endif %}
+</div>
+{% endfor %}
+
+<div>
+    {% if page_number > 1 %}
+    <a href="?query={{query}}&page={{ page_number - 1 }}" class="submit">Previous</a>
+    {% endif %}
+
+    Page {{ page_number }}
+
+    {% if messages|length == 20 %}
+    <a href="?query={{query}}&page={{ page_number + 1 }}" class="submit">Next</a>
+    {% endif %}
+</div>
+
+{% endblock %}
