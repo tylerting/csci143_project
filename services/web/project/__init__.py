@@ -408,9 +408,9 @@ def query_messages(query, a):
     """)
 
     res = connection.execute(sql, {
-        'offset': 20 * (a - 1),
-        'query': ' & '.join(query.split())
-   })
+    'offset': 20 * (a - 1),
+    'query': ' & '.join(query.split())
+    })
 
     print('inside query_messages')
 
