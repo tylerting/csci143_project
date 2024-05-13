@@ -8,21 +8,23 @@ CREATE TABLE users (
     age INTEGER
 );
 
-CREATE TABLE tweet_urls (
-    id_tweets BIGINT PRIMARY KEY,
-    id_urls BIGINT
+
+CREATE TABLE urls (
+    id_urls BIGSERIAL PRIMARY KEY,
+    url TEXT UNIQUE
 );
+
 
 CREATE TABLE messages (
-    id BIGSERIAL primary key,
-    sender_id integer not null REFERENCES users(id),
-    message text not null,
-    created_at timestamp not null default current_timestamp,
-    id_urls INTEGER REFERENCES urls(id_urls)
+    id BIGSERIAL PRIMARY KEY,
+    creator_id INTEGER NOT NULL REFERENCES users(id),
+    message TEXT NOT NULL,
+    time TIMESTAMP NOT NULL DEFAULT current_timestamp
+
 );
 
-
+CREATE INDEX m3 ON messages(time, id, creator_id, message);
 CREATE EXTENSION IF NOT EXISTS RUM;
-CREATE EXTENSION IF NOT EXISTS pg_trgm;
+CREATE INDEX search_query ON messages USING RUM(to_tsvector('english', message));
 
-
+Commit; 
