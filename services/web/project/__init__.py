@@ -418,9 +418,10 @@ def query_messages(query, a):
 
         message = row_messages[1]
         cleaned_message = bleach.clean(
-                message,
-                tags=['b', 'span'],
-                attributes={'span': ['class']})
+            message,
+            tags=['b', 'span'],
+            attributes={'span': ['class']}
+        )
         linked_message = bleach.linkify(cleaned_message)
 
         image_url = 'https://robohash.org/' + row_messages[4]
